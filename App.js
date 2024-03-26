@@ -1,39 +1,26 @@
-import { StatusBar } from 'expo-status-bar';
-import { useState } from 'react';
-import { FlatList, StyleSheet, Text, View, TouchableOpacity } from 'react-native';
+import { useEffect, useState } from "react";
+import Home from "./screens/Home";
+import * as Font from 'expo-font';
+import * as SplashScreen from 'expo-splash-screen';
+
+const getFonts = () => Font.loadAsync({
+  'poppins-regular': require('./assets/fonts/Poppins-Regular.ttf'),
+  'workbench-regular': require('./assets/fonts/Workbench-Regular.ttf'),
+});
+
+SplashScreen.preventAutoHideAsync();
 
 export default function App() {
-  const [people, setPeople] = useState([
-    {name: "Tesa", id: 1},
-    {name: "Troy", id: 2}
-  ]);
+  const [fontsLoaded, setFontsLoaded]  = useState(false);
 
-  const pressHandler = (id) => {
-    setPeople((prevPeople) => {
-      return prevPeople.filter(person => person.id !== id);
+  useEffect(() => {
+    getFonts().then(async () => {
+      setFontsLoaded(true);
+      await SplashScreen.hideAsync();
     });
-  }
+  }, [])
 
-  return (
-    <View style={styles.container}>
-      <FlatList
-        keyExtractor={(item) => item.id}
-        data={people}
-        renderItem={({item}) => (
-          <TouchableOpacity onPress={() => pressHandler(item.id)}>
-            <Text>{item.name}</Text>
-            </TouchableOpacity>
-        )}
-       />
-    </View>
-  );
+  if (!fontsLoaded) return null
+
+  return <Home />
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-});
