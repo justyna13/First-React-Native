@@ -1,15 +1,14 @@
-import { View, StyleSheet, Text } from "react-native";
+import { View, StyleSheet, Text, Button } from "react-native";
+import { globalStyles } from "../styles/global";
 
-export default function ReviewDetails() {
+export default function ReviewDetails({ navigation }) {
+    const pressHandler = () => {
+        navigation.goBack()
+    }
     return (
-        <View style={styles.container}>
-            <Text>review details</Text>
+        <View style={globalStyles.container}>
+            <Text style={globalStyles.titleText}>Review details</Text>
+            <Button title="Back to home screen" onPress={pressHandler} />
         </View>
     )
 }
-
-const styles = StyleSheet.create({
-    container: {
-        padding: 24
-    }
-});

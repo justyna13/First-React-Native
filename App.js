@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import Home from "./screens/Home";
 import * as Font from 'expo-font';
 import * as SplashScreen from 'expo-splash-screen';
+import Navigator from './routes/homeStack';
 
 const getFonts = () => Font.loadAsync({
   'poppins-regular': require('./assets/fonts/Poppins-Regular.ttf'),
@@ -22,5 +23,5 @@ export default function App() {
 
   if (!fontsLoaded) return null
 
-  return <Home />
+  return <Navigator />
 }
