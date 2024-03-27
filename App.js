@@ -1,8 +1,11 @@
+import 'react-native-gesture-handler';
 import { useEffect, useState } from "react";
 import Home from "./screens/Home";
 import * as Font from 'expo-font';
 import * as SplashScreen from 'expo-splash-screen';
-import Navigator from './routes/homeStack';
+import RootDrawerNavigator from "./routes/Drawer";
+import { NavigationContainer } from "@react-navigation/native";
+
 
 const getFonts = () => Font.loadAsync({
   'poppins-regular': require('./assets/fonts/Poppins-Regular.ttf'),
@@ -23,5 +26,9 @@ export default function App() {
 
   if (!fontsLoaded) return null
 
-  return <Navigator />
+  return (
+    <NavigationContainer>
+      <RootDrawerNavigator />
+    </NavigationContainer>
+  )
 }
