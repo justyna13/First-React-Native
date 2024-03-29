@@ -1,4 +1,4 @@
-import { StyleSheet, Text, View } from "react-native";
+import { StyleSheet, Text, View, Image, ImageBackground } from "react-native";
 import Icon from 'react-native-vector-icons/MaterialIcons';
 
 export default function Header({ title, navigation }) {
@@ -8,12 +8,13 @@ export default function Header({ title, navigation }) {
     };
     
     return (
-        <View style={styles.header}>
+        <ImageBackground source={require('../assets/bg.png')} style={styles.header}>
+            <Image style={styles.headerImg} source={require('../assets/app.png')} />
             <Text style={styles.icon} onPress={openMenu} ><Icon name="menu" size={28} /></Text>
             <View>
                 <Text style={styles.headerText}>{title}</Text>
             </View>
-        </View>
+        </ImageBackground>
     )
 }
 
@@ -24,7 +25,7 @@ const styles = StyleSheet.create({
         flexDirection: 'row',
         alignItems: 'center',
         justifyContent: 'center',
-        textAlign: 'center'
+        textAlign: 'center',
     },
     headerText: {
         fontWeight: 'bold',
@@ -35,5 +36,10 @@ const styles = StyleSheet.create({
     icon: {
         position: 'absolute',
         left: 16
+    },
+    headerImg: {
+        width: 26,
+        height: 26,
+        marginHorizontal: 12
     }
 })
