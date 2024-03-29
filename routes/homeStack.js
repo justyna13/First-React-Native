@@ -1,24 +1,27 @@
 import { createNativeStackNavigator } from'@react-navigation/native-stack';
-import { NavigationContainer } from '@react-navigation/native';
 import Home from '../screens/Home';
 import ReviewDetails from '../screens/ReviewDetails';
+import Header from '../shared/Header';
 
 const Stack = createNativeStackNavigator();
 
 export default function HomeStack() {
-    const defaultNavigationOptions = {
+    const defaultNavigationOptions =  {
         headerStyle: { 
             backgroundColor: '#eee'
         },
-        headerTintColor: '#444'
+        headerTintColor: '#444',
     };
 
+    const homeNavigationOptions = ({ navigation}) => {
+        return {
+            headerTitle: () => <Header title="GameZonee" navigation={navigation} /> 
+        }
+    }
     return (
-        <NavigationContainer >
-            <Stack.Navigator screenOptions={defaultNavigationOptions}>
-                <Stack.Screen name="Home" component={Home} options={ {title: 'GameZoneee' }} />
-                <Stack.Screen name="Review Details" component={ReviewDetails} />
-            </Stack.Navigator>
-        </NavigationContainer>
+        <Stack.Navigator screenOptions={defaultNavigationOptions}>
+            <Stack.Screen name="Home" component={Home} options={homeNavigationOptions} />
+            <Stack.Screen name="Review Details" component={ReviewDetails}  />
+        </Stack.Navigator>
     )
 }
